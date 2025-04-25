@@ -11,6 +11,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <!-- html2pdf.js para gerar PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 <body>
     <!-- Toggle de Tema -->
@@ -36,7 +38,7 @@
                 <li><a href="#contato">Contato</a></li>
             </ul>
             <div class="resume-btn">
-                <a href="assets/Meucurriculo1.pdf" download="Curriculo_Adeilton_Lima.pdf">Download CV</a>
+                <a href="#" id="openResumeModal">Download CV</a>
             </div>
             <div class="hamburger">
                 <span></span>
@@ -378,6 +380,114 @@
         </div>
     </footer>
 
+    <!-- Modal do Currículo -->
+    <div id="resumeModal" class="cv-modal">
+        <div class="cv-modal-content">
+            <div class="cv-modal-header">
+                <h2><i class="fas fa-file-alt"></i> Currículo - Adeilton Lima</h2>
+                <button class="cv-close-btn" id="closeResumeModal">&times;</button>
+            </div>
+            <div class="cv-resume-wrapper">
+                <div class="cv-resume" id="resumeContent">
+                    <div class="cv-header">
+                        <div class="cv-header-content">
+                            <h1>Adeilton Lima</h1>
+                            <h2>Desenvolvedor Criativo</h2>
+                        </div>
+                        <div class="cv-profile-image">
+                            <img src="assets/minhafoto.jpg" alt="Adeilton Lima">
+                        </div>
+                    </div>
+                    
+                    <div class="cv-contact-info">
+                        <div class="cv-contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>WhatsApp: (69) 99280-6053</span>
+                        </div>
+                        <div class="cv-contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>E-mail: adeiltoncorreialima97@gmail.com</span>
+                        </div>
+                        <div class="cv-contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Rua João Goulart, 671, Riachuelo - Ji-Paraná, RO</span>
+                        </div>
+                    </div>
+                    
+                    <div class="cv-section" data-delay="100">
+                        <h3 class="cv-section-title"><i class="fas fa-user"></i> Sobre Mim</h3>
+                        <p>Estudante de Engenharia de Software em andamento, apaixonado por tecnologia e inovação.</p>
+                        <p>Tenho experiência sólida com linguagens modernas e foco em transformar ideias em produtos digitais impactantes. Busco sempre unir estética, funcionalidade e performance no que desenvolvo.</p>
+                    </div>
+                    
+                    <div class="cv-section" data-delay="300">
+                        <h3 class="cv-section-title"><i class="fas fa-laptop-code"></i> Habilidades Técnicas</h3>
+                        <div class="cv-skills">
+                            <span class="cv-skill">HTML5</span>
+                            <span class="cv-skill">CSS3</span>
+                            <span class="cv-skill">JavaScript</span>
+                            <span class="cv-skill">Python</span>
+                            <span class="cv-skill">SQL</span>
+                            <span class="cv-skill">React</span>
+                            <span class="cv-skill">Node.js</span>
+                            <span class="cv-skill">TailwindCSS</span>
+                            <span class="cv-skill">Git & GitHub</span>
+                        </div>
+                    </div>
+                    
+                    <div class="cv-section" data-delay="500">
+                        <h3 class="cv-section-title"><i class="fas fa-graduation-cap"></i> Formação Acadêmica</h3>
+                        <div class="cv-education-item">
+                            <p><strong>Engenharia de Software</strong> - Em andamento</p>
+                            <p class="cv-education-period">2023 - presente</p>
+                        </div>
+                    </div>
+                    
+                    <div class="cv-section" data-delay="700">
+                        <h3 class="cv-section-title"><i class="fas fa-certificate"></i> Cursos & Certificações</h3>
+                        <div class="cv-course-item">
+                            <p><strong>Desenvolvimento Web Completo</strong> - Curso de HTML, CSS e JavaScript</p>
+                        </div>
+                        <div class="cv-course-item">
+                            <p><strong>JavaScript Moderno</strong> - ES6+, Async/Await, Promise</p>
+                        </div>
+                        <div class="cv-course-item">
+                            <p><strong>Python para Iniciantes</strong> - Lógica e estruturas de dados</p>
+                        </div>
+                        <div class="cv-course-item">
+                            <p><strong>Controle de Versão</strong> - Git e GitHub</p>
+                        </div>
+                        <div class="cv-course-item">
+                            <p><strong>UI/UX Design</strong> - TailwindCSS e Frameworks modernos</p>
+                        </div>
+                    </div>
+                    
+                    <div class="cv-section" data-delay="900">
+                        <h3 class="cv-section-title"><i class="fas fa-project-diagram"></i> Projetos em Destaque</h3>
+                        <div class="cv-project-item">
+                            <p><strong>Site Institucional Responsivo</strong></p>
+                            <p>Desenvolvimento de site institucional com responsividade total, otimização para SEO e integração de formulário de contato com processamento backend.</p>
+                        </div>
+                        <div class="cv-project-item">
+                            <p><strong>Sistema de Autenticação</strong></p>
+                            <p>Implementação de sistema de login e registro utilizando Node.js e React, com autenticação JWT e validação de formulários.</p>
+                        </div>
+                        <div class="cv-project-item">
+                            <p><strong>Aplicativo de Lista de Tarefas</strong></p>
+                            <p>Desenvolvimento de aplicativo de gerenciamento de tarefas com Python, SQLite para persistência de dados e interface gráfica.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="cv-download-container">
+                        <button id="downloadPdf" class="cv-download-btn">
+                            <i class="fas fa-download"></i> Baixar como PDF
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- EmailJS -->
     <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
     <script>
@@ -454,6 +564,45 @@
             // Executa também no carregamento caso a seção já esteja visível
             if (skillsSection && skillsSection.getBoundingClientRect().top < window.innerHeight) {
                 animateProgressBars();
+            }
+        });
+    </script>
+    <!-- Script específico para o currículo animado -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animar as seções do currículo quando o modal for aberto
+            const openResumeBtn = document.getElementById('openResumeModal');
+            const mobileResumeBtn = document.getElementById('mobileOpenResumeModal');
+            const resumeWrapper = document.querySelector('.cv-resume-wrapper');
+            
+            function animateCurriculumSections() {
+                setTimeout(function() {
+                    document.querySelectorAll('.cv-section').forEach(function(section, index) {
+                        setTimeout(function() {
+                            section.classList.add('animate');
+                        }, 200 * index);
+                    });
+                }, 500);
+            }
+            
+            if (openResumeBtn) {
+                openResumeBtn.addEventListener('click', animateCurriculumSections);
+            }
+            
+            if (mobileResumeBtn) {
+                mobileResumeBtn.addEventListener('click', animateCurriculumSections);
+            }
+            
+            // Animar seções durante a rolagem
+            if (resumeWrapper) {
+                resumeWrapper.addEventListener('scroll', function() {
+                    document.querySelectorAll('.cv-section:not(.animate)').forEach(function(section) {
+                        const rect = section.getBoundingClientRect();
+                        if (rect.top < window.innerHeight * 0.85) {
+                            section.classList.add('animate');
+                        }
+                    });
+                });
             }
         });
     </script>

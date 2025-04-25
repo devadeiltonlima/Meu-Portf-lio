@@ -6,6 +6,7 @@ const selectAll = (selector) => document.querySelectorAll(selector);
 let body, themeSwitch, navbar, navLinks, hamburger, mobileMenu, menuOverlay, closeMenu;
 let progressBars, portfolioModals, viewProjectBtns, closeModalBtns;
 let quickContactBtn, quickContactForm, closeQuickContact;
+let openResumeModal, resumeModal, closeResumeModal, downloadPdfBtn;
 
 // Função de inicialização principal
 document.addEventListener('DOMContentLoaded', function() {
@@ -38,6 +39,53 @@ document.addEventListener('DOMContentLoaded', function() {
             this.alt = 'Imagem placeholder';
         };
     });
+    
+    // Adicionar variável RGB para o accent color (para usar em transparências)
+    const root = document.documentElement;
+    const accentColor = getComputedStyle(root).getPropertyValue('--accent').trim();
+    
+    // Converter cor hex para RGB para uso em transparências
+    const hexToRgb = (hex) => {
+        // Remove o # se existir
+        hex = hex.replace('#', '');
+        
+        // Converte de 3 dígitos para 6 dígitos se necessário (ex: #fff para #ffffff)
+        if (hex.length === 3) {
+            hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2];
+        }
+        
+        // Converte para RGB
+        const r = parseInt(hex.substring(0, 2), 16);
+        const g = parseInt(hex.substring(2, 4), 16);
+        const b = parseInt(hex.substring(4, 6), 16);
+        
+        return `${r}, ${g}, ${b}`;
+    };
+    
+    // Tenta converter e definir a variável RGB
+    try {
+        if (accentColor && accentColor !== '') {
+            const rgbValue = hexToRgb(accentColor);
+            root.style.setProperty('--accent-rgb', rgbValue);
+        }
+    } catch (error) {
+        console.warn('Erro ao converter cor para RGB:', error);
+        // Valor fallback
+        root.style.setProperty('--accent-rgb', '0, 255, 255');
+    }
+    
+    // Configurar observador para animar seções do currículo quando visíveis
+    if (resumeModal) {
+        resumeModal.addEventListener('animationSections', animateCVSections);
+        
+        // Quando o modal for aberto, disparar a animação das seções após um curto delay
+        const wrapper = resumeModal.querySelector('.cv-resume-wrapper');
+        if (wrapper) {
+            wrapper.addEventListener('scroll', function() {
+                resumeModal.dispatchEvent(new CustomEvent('animationSections'));
+            });
+        }
+    }
 });
 
 // Inicializa referências a elementos DOM
@@ -53,6 +101,12 @@ function initDOMElements() {
     quickContactBtn = select('#quickContact');
     quickContactForm = select('#quickContactForm');
     closeQuickContact = select('.close-quick-contact');
+    
+    // Elementos do modal do currículo
+    openResumeModal = select('#openResumeModal');
+    resumeModal = select('#resumeModal');
+    closeResumeModal = select('#closeResumeModal');
+    downloadPdfBtn = select('#downloadPdf');
     
     // Adiciona menu mobile ao DOM
     addMobileMenuToDom();
@@ -94,6 +148,31 @@ function setupEventListeners() {
     // Contato rápido
     quickContactBtn.addEventListener('click', toggleQuickContact);
     closeQuickContact.addEventListener('click', toggleQuickContact);
+
+    // Modal do currículo
+    if (openResumeModal && resumeModal && closeResumeModal) {
+        openResumeModal.addEventListener('click', openResume);
+        closeResumeModal.addEventListener('click', closeResume);
+        
+        // Fechar ao clicar fora do conteúdo
+        resumeModal.addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeResume();
+            }
+        });
+        
+        // Fechar com tecla ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && resumeModal.style.display === 'flex') {
+                closeResume();
+            }
+        });
+    }
+    
+    // Geração de PDF
+    if (downloadPdfBtn) {
+        downloadPdfBtn.addEventListener('click', generatePDF);
+    }
 
     // Manipulação de formulários
     setupFormSubmissions();
@@ -240,6 +319,7 @@ function addMobileMenuToDom() {
                 <a href="#servicos">Serviços</a>
                 <a href="#portfolio">Portfólio</a>
                 <a href="#contato">Contato</a>
+                <a href="#" id="mobileOpenResumeModal">Visualizar Currículo</a>
             </div>
             <div class="mobile-theme-toggle">
                 <span class="theme-label">Alternar Tema</span>
@@ -275,6 +355,16 @@ function addMobileMenuToDom() {
             // Sincronizar com o botão principal
             themeSwitch.checked = this.checked;
             toggleTheme();
+        });
+    }
+    
+    // Configurar botão do currículo no menu mobile
+    const mobileOpenResumeModal = select('#mobileOpenResumeModal');
+    if (mobileOpenResumeModal && resumeModal) {
+        mobileOpenResumeModal.addEventListener('click', function(e) {
+            e.preventDefault();
+            toggleMobileMenu(); // Fechar o menu mobile
+            openResume(e); // Abrir o modal do currículo
         });
     }
     
@@ -435,3 +525,75 @@ document.addEventListener('scroll', function() {
         }
     });
 });
+
+// Abrir modal do currículo
+function openResume(e) {
+    e.preventDefault();
+    resumeModal.style.display = 'flex';
+    body.classList.add('no-scroll');
+    
+    // Iniciar as animações após o modal ser aberto
+    setTimeout(() => {
+        animateCVSections();
+        // Disparar o evento para seções que ficam visíveis durante a rolagem
+        resumeModal.dispatchEvent(new CustomEvent('animationSections'));
+    }, 300);
+}
+
+// Fechar modal do currículo
+function closeResume() {
+    resumeModal.style.display = 'none';
+    body.classList.remove('no-scroll');
+}
+
+// Gerar PDF
+function generatePDF() {
+    // Referência ao conteúdo do currículo
+    const resumeContent = document.getElementById('resumeContent');
+    
+    // Botão que será temporariamente escondido durante a geração do PDF
+    const downloadBtn = document.getElementById('downloadPdf');
+    
+    // Esconder o botão antes de gerar o PDF
+    downloadBtn.style.display = 'none';
+    
+    // Configurações básicas para o PDF
+    const options = {
+        margin: 10,
+        filename: 'Curriculo_Adeilton_Lima.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+    };
+    
+    // Gerar o PDF usando html2pdf com configurações simples
+    html2pdf()
+        .from(resumeContent)
+        .set(options)
+        .save()
+        .then(() => {
+            // Após o PDF ser gerado, mostrar o botão novamente
+            setTimeout(() => {
+                downloadBtn.style.display = 'block';
+            }, 1000);
+        })
+        .catch(err => {
+            console.error('Erro ao gerar PDF:', err);
+            downloadBtn.style.display = 'block';
+        });
+}
+
+// Função para animar as seções do currículo
+function animateCVSections() {
+    const sections = document.querySelectorAll('.cv-section');
+    
+    sections.forEach(section => {
+        const sectionTop = section.getBoundingClientRect().top;
+        const windowHeight = window.innerHeight;
+        
+        // Se a seção estiver visível na janela
+        if (sectionTop < windowHeight * 0.85) {
+            section.classList.add('animate');
+        }
+    });
+}
