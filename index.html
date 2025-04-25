@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adeilton Lima - Desenvolvedor Criativo</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Font Awesome para ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Toggle de Tema -->
+    <div class="theme-toggle">
+        <input type="checkbox" id="theme-switch">
+        <label for="theme-switch" class="toggle-label">
+            <i class="fas fa-moon"></i>
+            <i class="fas fa-sun"></i>
+            <span class="toggle-ball"></span>
+        </label>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">Adeilton Lima</div>
+            <ul class="nav-links">
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#habilidades">Habilidades</a></li>
+                <li><a href="#servicos">Serviços</a></li>
+                <li><a href="#portfolio">Portfólio</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+            <div class="resume-btn">
+                <a href="assets/Meucurriculo1.pdf" download="Curriculo_Adeilton_Lima.pdf">Download CV</a>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Seção Home -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Olá, eu sou <span class="highlight-text" id="name-typing">Adeilton Lima</span></h1>
+                    <h2 id="title-typing">Desenvolvedor Criativo</h2>
+                    <p class="slogan">Transformando ideias em experiências digitais memoráveis</p>
+                    <div class="cta-buttons">
+                        <a href="#portfolio" class="btn btn-primary">Ver Projetos</a>
+                        <a href="#contato" class="btn btn-secondary">Fale Comigo</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="profile-container">
+                        <img src="assets/minhafoto.jpg" alt="Adeilton Lima">
+                    </div>
+                </div>
+            </div>
+            <div class="scroll-down">
+                <a href="#sobre">
+                    <span class="mouse">
+                        <span class="wheel"></span>
+                    </span>
+                    <span class="arrow">
+                        <span></span>
+                        <span></span>
+                    </span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Sobre Mim -->
+    <section id="sobre" class="about">
+        <div class="container">
+            <h2 class="section-title">Sobre Mim</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Estou trilhando meu caminho em Engenharia de Software, mas já atuo como um verdadeiro solucionador criativo. Domino HTML, CSS, Tailwind, JavaScript, TypeScript e Python — e com essas ferramentas, crio experiências que unem lógica e impacto visual. Meu foco é entregar não só códigos que funcionam, mas projetos que falam por si.</p>
+                    <p>O que me diferencia? Eu não codifico só pra entregar: eu codifico pra causar presença. Enquanto muitos entregam o comum, eu entrego o que marca. Porque o código certo, no lugar certo, transforma tudo — e eu estou sempre buscando esse ponto exato.</p>
+                </div>
+                <div class="about-highlight">
+                    <div class="highlight-box">
+                        <h3>O que me diferencia</h3>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Foco em detalhes que fazem a diferença</li>
+                            <li><i class="fas fa-check-circle"></i> Comprometimento com prazos e resultados</li>
+                            <li><i class="fas fa-check-circle"></i> Aprendizado contínuo de novas tecnologias</li>
+                            <li><i class="fas fa-check-circle"></i> Comunicação clara e objetiva</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Habilidades -->
+    <section id="habilidades" class="skills">
+        <div class="container">
+            <h2 class="section-title">Minhas Habilidades</h2>
+            <div class="skills-container">
+                <div class="skill-card">
+                    <i class="fab fa-html5"></i>
+                    <h3>HTML5</h3>
+                    <div class="progress-container">
+                        <div class="progress-bar" data-progress="90"></div>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <i class="fab fa-css3-alt"></i>
+                    <h3>CSS3</h3>
+                    <div class="progress-container">
+                        <div class="progress-bar" data-progress="85"></div>
+                    </div>
+                </div>
+                    <div class="skill-card">
+                        <i class="fab fa-python"></i>
+                        <h3>Python</h3>
+                        <div class="progress-container">
+                            <div class="progress-bar" data-progress="85"></div>
+                        </div>
+                </div>
+                <div class="skill-card">
+                    <i class="fab fa-js"></i>
+                    <h3>JavaScript</h3>
+                    <div class="progress-container">
+                        <div class="progress-bar" data-progress="80"></div>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <i class="fab fa-react"></i>
+                    <h3>React</h3>
+                    <div class="progress-container">
+                        <div class="progress-bar" data-progress="75"></div>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <i class="fab fa-node-js"></i>
+                    <h3>Node.js</h3>
+                    <div class="progress-container">
+                        <div class="progress-bar" data-progress="70"></div>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <i class="fas fa-database"></i>
+                    <h3>SQL</h3>
+                    <div class="progress-container">
+                        <div class="progress-bar" data-progress="75"></div>
+                    </div>
+                </div>
+            </div>
+            <p class="skills-quote">A tecnologia é apenas uma ferramenta. O que importa é como a usamos para criar valor.</p>
+        </div>
+    </section>
+
+    <!-- Seção Serviços -->
+    <section id="servicos" class="services">
+        <div class="container">
+            <h2 class="section-title">Meus Serviços</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>Desenvolvimento Web</h3>
+                    <p>Criação de sites e aplicações web responsivas, performáticas e otimizadas para SEO.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Design Responsivo</h3>
+                    <p>Interfaces que funcionam perfeitamente em todos os dispositivos, do desktop ao smartphone.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <h3>Desenvolvimento Backend</h3>
+                    <p>APIs robustas e sistemas escaláveis utilizando as melhores práticas de desenvolvimento.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Portfólio -->
+    <section id="portfolio" class="portfolio">
+        <div class="container">
+            <h2 class="section-title">Meu Portfólio</h2>
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <img src="assets/project1.jpg" alt="Projeto E-commerce">
+                        <div class="portfolio-overlay">
+                            <button class="view-project" data-project="project1">Ver Projeto</button>
+                        </div>
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>E-commerce Moderno</h3>
+                        <div class="portfolio-tags">
+                            <span>React</span>
+                            <span>Node.js</span>
+                            <span>MongoDB</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <img src="assets/project2.jpg" alt="Dashboard Analytics">
+                        <div class="portfolio-overlay">
+                            <button class="view-project" data-project="project2">Ver Projeto</button>
+                        </div>
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>Dashboard Analytics</h3>
+                        <div class="portfolio-tags">
+                            <span>Vue.js</span>
+                            <span>D3.js</span>
+                            <span>Firebase</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <img src="assets/project3.jpg" alt="App Mobile">
+                        <div class="portfolio-overlay">
+                            <button class="view-project" data-project="project3">Ver Projeto</button>
+                        </div>
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>Aplicativo de Produtividade</h3>
+                        <div class="portfolio-tags">
+                            <span>React Native</span>
+                            <span>Redux</span>
+                            <span>Express</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modais de Portfólio -->
+    <div class="portfolio-modal" id="project1-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>E-commerce Moderno</h2>
+            <div class="modal-image">
+                <img src="assets/project1-full.jpg" alt="E-commerce Moderno">
+            </div>
+            <div class="modal-description">
+                <p>Uma plataforma completa de e-commerce com catálogo de produtos, carrinho de compras, pagamentos online e área do cliente. O projeto foi desenvolvido com foco em performance e experiência do usuário.</p>
+                <h3>Tecnologias Utilizadas</h3>
+                <ul>
+                    <li>Frontend: React.js, Redux, Styled Components</li>
+                    <li>Backend: Node.js, Express, MongoDB</li>
+                    <li>Pagamentos: Stripe API</li>
+                    <li>Deploy: AWS</li>
+                </ul>
+                <div class="modal-buttons">
+                    <a href="https://github.com/username/ecommerce" target="_blank" class="btn">Ver Código</a>
+                    <a href="https://demo-ecommerce.com" target="_blank" class="btn">Demo ao Vivo</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Seção Contato -->
+    <section id="contato" class="contact">
+        <div class="container">
+            <h2 class="section-title">Entre em Contato</h2>
+            <p class="contact-intro">Tem um projeto em mente? Vamos trabalhar juntos para torná-lo realidade!</p>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div class="info-item">
+                        <i class="fas fa-envelope"></i>
+                        <h3>Email</h3>
+                        <p><a href="mailto:adeiltoncorreialima97@gmail.com">adeiltoncorreialima97@gmail.com</a></p>
+                    </div>
+                    <div class="info-item">
+                        <i class="fab fa-whatsapp"></i>
+                        <h3>WhatsApp</h3>
+                        <p><a href="https://wa.me/5569992806053?text=Olá,%20vim%20pelo%20seu%20portfólio!" target="_blank"> +55 (69) 99280-6053</a> </p>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <h3>Localização</h3>
+                        <p>Ji-Paraná - Rondônia</p>
+                    </div>
+                    <div class="social-links contact-social">
+                        <a href="https://github.com/devadeiltonlima" target="_blank"><i class="fab fa-github"></i></a>
+                        <a href="https://linkedin.com/in/username" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://instagram.com/ahadeilton" target="_blank"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="from_name">Nome</label>
+                            <input type="text" id="from_name" name="from_name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="reply_to">Email</label>
+                            <input type="email" id="reply_to" name="reply_to" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Mensagem</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" id="submit-btn" class="btn btn-primary">Enviar Mensagem</button>
+                    </form>
+                    <div id="success-message" style="display:none; margin-top: 20px; padding: 15px; background-color: #dff0d8; color: #3c763d; border-radius: 4px; text-align: center;">
+                        ✅ Mensagem enviada! Verifique seu email em instantes.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Botão Flutuante -->
+    <div class="floating-btn">
+        <button id="quickContact">
+            <i class="fas fa-comments"></i>
+        </button>
+    </div>
+
+    <!-- Formulário de Contato Rápido -->
+    <div class="quick-contact" id="quickContactForm">
+        <div class="quick-contact-header">
+            <h3>Contato Rápido</h3>
+            <button class="close-quick-contact">&times;</button>
+        </div>
+        <form>
+            <input type="text" placeholder="Seu nome" required>
+            <input type="email" placeholder="Seu email" required>
+            <textarea placeholder="Sua mensagem" required></textarea>
+            <button type="submit" class="btn">Enviar</button>
+        </form>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <span>AL</span>
+                    <p class="tagline">Desenvolvedor Criativo</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-nav">
+                        <a href="#home">Home</a>
+                        <a href="#sobre">Sobre</a>
+                        <a href="#habilidades">Habilidades</a>
+                        <a href="#servicos">Serviços</a>
+                        <a href="#portfolio">Portfólio</a>
+                        <a href="#contato">Contato</a>
+                    </div>
+                    <div class="social-links">
+                        <a href="https://github.com/devadeiltonlima" target="_blank"><i class="fab fa-github"></i></a>
+                        <a href="https://linkedin.com/in/username" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://instagram.com/ahadeilton" target="_blank"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <p class="copyright">&copy; 2025 Adeilton Lima. Todos os direitos reservados.</p>
+            </div>
+            <div class="back-to-top">
+                <a href="#home"><i class="fas fa-arrow-up"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- EmailJS -->
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        emailjs.init("BY00j1lNvwv8mrQ_3"); // Sua Public Key correta
+        
+        const form = document.getElementById('contactForm');
+        const submitBtn = document.getElementById('submit-btn');
+        const successMessage = document.getElementById('success-message');
+        
+        form.addEventListener('submit', function(e) {
+          e.preventDefault();
+          
+          submitBtn.disabled = true;
+          submitBtn.textContent = 'Enviando...';
+          
+          // Adicionando o e-mail de destino como parâmetro adicional
+          const templateParams = {
+            from_name: document.getElementById('from_name').value,
+            reply_to: document.getElementById('reply_to').value,
+            message: document.getElementById('message').value,
+            to_email: 'adeiltoncorreialima97@gmail.com' // E-mail do destinatário fixo
+          };
+          
+          emailjs.send(
+            'service_umww22p',     // Seu Service ID
+            'template_2qum082',    // Seu Template ID correto
+            templateParams         // Parâmetros do template incluindo o destinatário
+          )
+          .then(function() {
+            form.style.display = 'none';
+            successMessage.style.display = 'block';
+          }, function(error) {
+            alert('Erro: ' + JSON.stringify(error));
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Tentar novamente';
+          });
+        });
+      });
+    </script>
+    <!-- Scripts do site -->
+    <script src="script.js"></script>
+    <!-- Script adicional para garantir a animação das barras de progresso -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Função para animar as barras de progresso
+            function animateProgressBars() {
+                const progressBars = document.querySelectorAll('.progress-bar');
+                
+                progressBars.forEach(bar => {
+                    const progress = bar.getAttribute('data-progress');
+                    setTimeout(() => {
+                        bar.style.width = progress + '%';
+                    }, 300);
+                });
+            }
+            
+            // Observador de interseção para a seção de habilidades
+            const skillsSection = document.querySelector('#habilidades');
+            
+            if (skillsSection) {
+                const observer = new IntersectionObserver(entries => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            animateProgressBars();
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.2 });
+                
+                observer.observe(skillsSection);
+            }
+            
+            // Executa também no carregamento caso a seção já esteja visível
+            if (skillsSection && skillsSection.getBoundingClientRect().top < window.innerHeight) {
+                animateProgressBars();
+            }
+        });
+    </script>
+</body>
+</html>
