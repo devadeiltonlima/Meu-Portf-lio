@@ -636,3 +636,105 @@ function animateCVSections() {
         }
     });
 }
+
+// Script para proteção do currículo contra cópia e seleção
+document.addEventListener('DOMContentLoaded', function() {
+    const resumeModal = document.getElementById('resumeModal');
+    const resumeContent = document.getElementById('resumeContent');
+    const protectionLayer = document.getElementById('protectionLayer');
+    const resumeWrapper = document.querySelector('.cv-resume-wrapper');
+    
+    if (resumeModal && resumeContent && protectionLayer) {
+        // 1. Bloquear menu de contexto (botão direito)
+        resumeContent.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            alert('Opção desativada para proteção de conteúdo.');
+            return false;
+        });
+        
+        // 2. Configurar a camada de proteção para não interferir com a rolagem
+        function showProtection() {
+            protectionLayer.style.display = 'block';
+            // Importante: pointer-events none permite que a rolagem funcione
+            protectionLayer.style.pointerEvents = 'none';
+        }
+        
+        function hideProtection() {
+            protectionLayer.style.display = 'none';
+        }
+        
+        // 3. Observar quando o modal é aberto ou fechado
+        const observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                if (mutation.attributeName === 'style') {
+                    const isVisible = resumeModal.style.display === 'flex';
+                    if (isVisible) {
+                        showProtection();
+                        
+                        // Garantir que o wrapper de rolagem funcione corretamente
+                        if (resumeWrapper) {
+                            resumeWrapper.style.overflowY = 'auto';
+                            resumeWrapper.style.webkitOverflowScrolling = 'touch';
+                        }
+                        
+                        // Adiciona classe no-drag a todas as imagens
+                        resumeContent.querySelectorAll('img').forEach(img => {
+                            img.classList.add('no-drag');
+                            img.setAttribute('draggable', 'false');
+                        });
+                    } else {
+                        hideProtection();
+                    }
+                }
+            });
+        });
+        
+        observer.observe(resumeModal, { attributes: true });
+        
+        // 4. Bloquear teclas de atalho sem interferir na rolagem
+        document.addEventListener('keydown', function(e) {
+            if (resumeModal.style.display === 'flex') {
+                // Ctrl+C, Ctrl+X, Ctrl+A, Ctrl+P, Ctrl+S
+                if (e.ctrlKey && (e.keyCode === 67 || e.keyCode === 88 || e.keyCode === 65 || e.keyCode === 80 || e.keyCode === 83)) {
+                    e.preventDefault();
+                    return false;
+                }
+                
+                // Print Screen (tecla PrtScn)
+                if (e.keyCode === 44) {
+                    e.preventDefault();
+                    return false;
+                }
+                
+                // F12 (ferramentas de desenvolvedor)
+                if (e.keyCode === 123) {
+                    e.preventDefault();
+                    return false;
+                }
+            }
+        });
+        
+        // 5. Garantir que a rolagem funcione no iOS e Android
+        if (resumeWrapper) {
+            // Fix para rolagem em iOS
+            resumeWrapper.addEventListener('touchstart', function() {
+                const top = resumeWrapper.scrollTop;
+                const totalScroll = resumeWrapper.scrollHeight;
+                const currentScroll = top + resumeWrapper.offsetHeight;
+                
+                if (top === 0) {
+                    resumeWrapper.scrollTop = 1;
+                } else if (currentScroll === totalScroll) {
+                    resumeWrapper.scrollTop = top - 1;
+                }
+            });
+            
+            // Certifique-se de que o conteúdo pode ser rolado
+            resumeWrapper.addEventListener('touchmove', function(e) {
+                if (e.targetTouches.length === 1) {
+                    e.stopPropagation();
+                }
+            }, { passive: true });
+        }
+    }
+});

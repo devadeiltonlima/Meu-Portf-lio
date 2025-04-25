@@ -961,6 +961,34 @@ img {
     padding: 30px;
 }
 
+/* Estilos para proteção do currículo contra cópia */
+.no-select {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+.no-drag {
+    pointer-events: none;
+}
+
+.cv-profile-image img {
+    pointer-events: none; /* Impede o arrasto da imagem */
+}
+
+.protection-layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    z-index: 999; /* Reduzido de 9999 para 999 */
+    display: none;
+    pointer-events: none; /* Permite que eventos passem através da camada */
+}
+
 /* Estilos para o Modal do Currículo - Versão Futurista */
 .cv-modal {
     display: none;
@@ -1065,6 +1093,7 @@ img {
     padding: 0;
     background: linear-gradient(135deg, var(--bg-primary), var(--bg-secondary));
     position: relative;
+    -webkit-overflow-scrolling: touch; /* Melhora a rolagem em dispositivos iOS */
 }
 
 .cv-resume-wrapper::-webkit-scrollbar {
@@ -1085,6 +1114,7 @@ img {
     padding: 40px;
     position: relative;
     z-index: 1;
+    height: auto; /* Garante que o conteúdo se expanda conforme necessário */
 }
 
 /* Efeito de grade de fundo */
