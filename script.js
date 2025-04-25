@@ -557,29 +557,68 @@ function generatePDF() {
     // Esconder o botão antes de gerar o PDF
     downloadBtn.style.display = 'none';
     
-    // Configurações básicas para o PDF
+    // Criar uma cópia do elemento para manipulação sem afetar o original
+    const pdfElement = resumeContent.cloneNode(true);
+    
+    // Remover elementos de animação e efeitos que podem causar problemas em dispositivos móveis
+    pdfElement.querySelectorAll('.cv-profile-image').forEach(el => {
+        el.style.animation = 'none';
+        el.style.boxShadow = 'none';
+    });
+    
+    // Ajustar estilos para melhor compatibilidade
+    pdfElement.style.width = '100%';
+    pdfElement.style.margin = '0';
+    pdfElement.style.padding = '15px';
+    pdfElement.style.backgroundColor = '#ffffff';
+    pdfElement.style.color = '#000000';
+    
+    // Configurações otimizadas para dispositivos móveis
     const options = {
-        margin: 10,
+        margin: [10, 10, 10, 10],
         filename: 'Curriculo_Adeilton_Lima.pdf',
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2 },
-        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        image: { type: 'jpeg', quality: 0.95 },
+        html2canvas: { 
+            scale: 2,
+            useCORS: true,
+            logging: false,
+            letterRendering: true,
+            allowTaint: true
+        },
+        jsPDF: { 
+            unit: 'mm', 
+            format: 'a4', 
+            orientation: 'portrait',
+            compress: true
+        }
     };
     
-    // Gerar o PDF usando html2pdf com configurações simples
+    // Criar elemento temporário para renderização
+    const tempContainer = document.createElement('div');
+    tempContainer.appendChild(pdfElement);
+    document.body.appendChild(tempContainer);
+    tempContainer.style.position = 'absolute';
+    tempContainer.style.left = '-9999px';
+    tempContainer.style.top = '0';
+    
+    // Gerar o PDF com as configurações otimizadas
     html2pdf()
-        .from(resumeContent)
+        .from(pdfElement)
         .set(options)
         .save()
         .then(() => {
-            // Após o PDF ser gerado, mostrar o botão novamente
+            // Após o PDF ser gerado, remover elemento temporário e mostrar o botão novamente
+            document.body.removeChild(tempContainer);
             setTimeout(() => {
                 downloadBtn.style.display = 'block';
             }, 1000);
         })
         .catch(err => {
             console.error('Erro ao gerar PDF:', err);
+            document.body.removeChild(tempContainer);
             downloadBtn.style.display = 'block';
+            // Mostrar mensagem de erro amigável para o usuário
+            alert('Ocorreu um erro ao gerar o PDF. Por favor, tente novamente.');
         });
 }
 
