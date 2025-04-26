@@ -86,6 +86,21 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
     }
+    
+    // Efeito de flip para as tags de tecnologia
+    const techTags = document.querySelectorAll('.portfolio-tags span[data-icon]');
+    
+    techTags.forEach(tag => {
+        // Adiciona um wrapper para preservar a orientação do ícone
+        tag.addEventListener('mouseenter', function() {
+            // Aplica uma classe temporária para lidar com a orientação
+            this.classList.add('flipping');
+        });
+        
+        tag.addEventListener('animationend', function() {
+            this.classList.remove('flipping');
+        });
+    });
 });
 
 // Inicializa referências a elementos DOM

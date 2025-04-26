@@ -950,18 +950,16 @@ body.light-mode .typescript-icon polygon {
     transition: all 0.3s ease;
     cursor: pointer;
     position: relative;
-    overflow: hidden;
     transform-style: preserve-3d;
     perspective: 1000px;
 }
 
+/* Aplicamos a rotação ao container, não ao conteúdo */
 .portfolio-tags span:hover {
-    background-color: var(--accent);
-    color: #fff;
     transform: rotateY(180deg);
 }
 
-/* Ícones para tecnologias nos cards */
+/* Face frontal (texto) */
 .portfolio-tags span[data-icon]::before {
     content: attr(data-text);
     position: absolute;
@@ -973,11 +971,11 @@ body.light-mode .typescript-icon polygon {
     align-items: center;
     justify-content: center;
     backface-visibility: hidden;
-    transform: rotateY(0deg);
-    transition: all 0.6s ease;
     background-color: inherit;
+    border-radius: 6px;
 }
 
+/* Face traseira (ícone) - Corrigimos a orientação com uma dupla rotação */
 .portfolio-tags span[data-icon]::after {
     content: attr(data-icon);
     font-family: "Font Awesome 5 Brands", "Font Awesome 5 Free";
@@ -994,16 +992,8 @@ body.light-mode .typescript-icon polygon {
     transform: rotateY(180deg);
     font-size: 1.2rem;
     color: #fff;
-    transition: all 0.6s ease;
     background-color: var(--accent);
-}
-
-.portfolio-tags span:hover::before {
-    transform: rotateY(180deg);
-}
-
-.portfolio-tags span:hover::after {
-    transform: rotateY(0deg);
+    border-radius: 6px;
 }
 
 /* Portfolio Modal */
@@ -2178,3 +2168,4 @@ body.light-mode .typescript-icon polygon {
         width: 100%;
     }
 }
+```
